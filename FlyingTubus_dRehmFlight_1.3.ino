@@ -178,30 +178,30 @@ float GyroErrorZ = 0.0;
 
 //Controller parameters (take note of defaults before modifying!): 
 float i_limit = 25.0;     //Integrator saturation level, mostly for safety (default 25.0)
-float maxRoll = 45.0;     //Max roll angle in degrees for angle mode (maximum ~70 degrees), deg/sec for rate mode 
-float maxPitch = 45.0;    //Max pitch angle in degrees for angle mode (maximum ~70 degrees), deg/sec for rate mode
-float maxYaw = 90.0;     //Max yaw rate in deg/sec
+float maxRoll = 20.0;     //Max roll angle in degrees for angle mode (maximum ~70 degrees), deg/sec for rate mode 
+float maxPitch = 20.0;    //Max pitch angle in degrees for angle mode (maximum ~70 degrees), deg/sec for rate mode
+float maxYaw = 360.0;     //Max yaw rate in deg/sec
 
-float Kp_roll_angle = 0.5;    //Roll P-gain - angle mode 
+float Kp_roll_angle = 0.1;    //Roll P-gain - angle mode 
 float Ki_roll_angle = 0.0;    //Roll I-gain - angle mode
 float Kd_roll_angle = 0.0;   //Roll D-gain - angle mode (has no effect on controlANGLE2)
-float B_loop_roll = 0.5;      //Roll damping term for controlANGLE2(), lower is more damping (must be between 0 to 1)
+float B_loop_roll = 0.95;      //Roll damping term for controlANGLE2(), lower is more damping (must be between 0 to 1)
 
-float Kp_pitch_angle = 0.5;   //Pitch P-gain - angle mode
+float Kp_pitch_angle = 0.1;   //Pitch P-gain - angle mode
 float Ki_pitch_angle = 0.0;   //Pitch I-gain - angle mode
 float Kd_pitch_angle = 0.0;  //Pitch D-gain - angle mode (has no effect on controlANGLE2)
-float B_loop_pitch = 0.5;     //Pitch damping term for controlANGLE2(), lower is more damping (must be between 0 to 1)
+float B_loop_pitch = 0.95;     //Pitch damping term for controlANGLE2(), lower is more damping (must be between 0 to 1)
 
-float Kp_roll_rate = 0.2;    //Roll P-gain - rate mode
+float Kp_roll_rate = 0.20;    //Roll P-gain - rate mode
 float Ki_roll_rate = 0.018;     //Roll I-gain - rate mode
 float Kd_roll_rate = 0.0002;  //Roll D-gain - rate mode (be careful when increasing too high, motors will begin to overheat!)
 
-float Kp_pitch_rate = 0.2;   //Pitch P-gain - rate mode
+float Kp_pitch_rate = 0.20;   //Pitch P-gain - rate mode
 float Ki_pitch_rate = 0.018;    //Pitch I-gain - rate mode
 float Kd_pitch_rate = 0.0002; //Pitch D-gain - rate mode (be careful when increasing too high, motors will begin to overheat!)
 
-float Kp_yaw = 1.6;           //Yaw P-gain
-float Ki_yaw = 0.5;          //Yaw I-gain
+float Kp_yaw = 1.5;           //Yaw P-gain
+float Ki_yaw = 0.4;          //Yaw I-gain
 float Kd_yaw = 0.00015;       //Yaw D-gain (be careful when increasing too high, motors will begin to overheat!)
 
 
@@ -417,8 +417,8 @@ void loop() {
   
   //PID Controller - SELECT ONE:
   //controlANGLE(); //Stabilize on angle setpoint
-  //controlANGLE2(); //Stabilize on angle setpoint using cascaded method. Rate controller must be tuned well first!
-  controlRATE(); //Stabilize on rate setpoint
+  controlANGLE2(); //Stabilize on angle setpoint using cascaded method. Rate controller must be tuned well first!
+  //controlRATE(); //Stabilize on rate setpoint
 
   //Actuator mixing and scaling to PWM values
   controlMixer(); //Mixes PID outputs to scaled actuator commands -- custom mixing assignments done here
@@ -477,7 +477,7 @@ void controlMixer() {
 
   //0.5 is centered servo, 0.0 is zero throttle if connecting to ESC for conventional PWM, 1.0 is max throttle
   s1_command_scaled = 0.6 + 4 * roll_PID; // BEN - TOP Servo
-  s2_command_scaled = 0.5 + 3 * pitch_PID; // BEN - TOP Servo
+  s2_command_scaled = 0.5 + 4 * pitch_PID; // BEN - TOP Servo
  
 }
 

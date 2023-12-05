@@ -192,16 +192,16 @@ float Ki_pitch_angle = 0.0;   //Pitch I-gain - angle mode
 float Kd_pitch_angle = 0.0;  //Pitch D-gain - angle mode (has no effect on controlANGLE2)
 float B_loop_pitch = 0.5;     //Pitch damping term for controlANGLE2(), lower is more damping (must be between 0 to 1)
 
-float Kp_roll_rate = 0.20;    //Roll P-gain - rate mode
-float Ki_roll_rate = 0.02;     //Roll I-gain - rate mode
-float Kd_roll_rate = 0.0001;  //Roll D-gain - rate mode (be careful when increasing too high, motors will begin to overheat!)
+float Kp_roll_rate = 0.2;    //Roll P-gain - rate mode
+float Ki_roll_rate = 0.018;     //Roll I-gain - rate mode
+float Kd_roll_rate = 0.0002;  //Roll D-gain - rate mode (be careful when increasing too high, motors will begin to overheat!)
 
-float Kp_pitch_rate = 0.20;   //Pitch P-gain - rate mode
-float Ki_pitch_rate = 0.02;    //Pitch I-gain - rate mode
-float Kd_pitch_rate = 0.0001; //Pitch D-gain - rate mode (be careful when increasing too high, motors will begin to overheat!)
+float Kp_pitch_rate = 0.2;   //Pitch P-gain - rate mode
+float Ki_pitch_rate = 0.018;    //Pitch I-gain - rate mode
+float Kd_pitch_rate = 0.0002; //Pitch D-gain - rate mode (be careful when increasing too high, motors will begin to overheat!)
 
-float Kp_yaw = 1.5;           //Yaw P-gain
-float Ki_yaw = 0.4;          //Yaw I-gain
+float Kp_yaw = 1.6;           //Yaw P-gain
+float Ki_yaw = 0.5;          //Yaw I-gain
 float Kd_yaw = 0.00015;       //Yaw D-gain (be careful when increasing too high, motors will begin to overheat!)
 
 
